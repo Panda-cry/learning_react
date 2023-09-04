@@ -1,6 +1,8 @@
 import './App.css';
 import ExpenseItem from './lecture_3/components/ExpenseItems';
 import NewExpence from './lecture_4/components/NewExpence';
+import React, { useState } from 'react';
+
 function App() {
 const  expenses = [
   {title:"Title 1" , amount: 123, date : new Date(2021, 2, 13), },
@@ -12,9 +14,13 @@ const  expenses = [
 
 ]
 
+  const [expences, setExpences] = useState(expenses)
+function addExpenseHandler(expense){
+  setExpences(expense)
+}
   return (
     <div class="container" className="App">
-      <NewExpence/>
+      <NewExpence addExpense={addExpenseHandler}/>
     <ul class="list-group list-group-flush">
     {
       expenses.map((expense, index)=>(

@@ -1,9 +1,15 @@
 import ExpenceForm from "./ExpenseFrom";
-function NewExpence(){
-
+function NewExpence(props){
+    function saveExpenseHandler(enteredExpenseData){
+        const expenseData = {
+            ...enteredExpenseData,
+            id : Math.random().toString()
+        }
+        props.addExpense(expenseData)
+    }
     return (
         <div class="container">
-        <ExpenceForm></ExpenceForm>
+        <ExpenceForm onSaveExpenseData={saveExpenseHandler}></ExpenceForm>
         </div>
     )
 }
