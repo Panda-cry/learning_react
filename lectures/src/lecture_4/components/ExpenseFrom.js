@@ -44,6 +44,7 @@ function ExpenceForm(props) {
       amount:amount,
       date: new Date(date)
     }
+    console.log(expenseObj)
     props.onSaveExpenseData(expenseObj)
     setAmount('')
     setTitle('')

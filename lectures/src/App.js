@@ -1,40 +1,33 @@
-import './App.css';
-import ExpenseItem from './lecture_3/components/ExpenseItems';
 import NewExpence from './lecture_4/components/NewExpence';
+import ExpensesList from "./lecture_4/components/ExpensesList"
 import React, { useState } from 'react';
 
-function App() {
-const  expenses = [
-  {title:"Title 1" , amount: 123, date : new Date(2021, 2, 13), },
-  {title:"Title 2" , amount: 124, date : new Date(2022, 5, 16), },
+const  expInitial = [
+  {id : "e1", title:"Title 1" , amount: 123, date : new Date(2021, 2, 13), },
+  {id : "e2",title:"Title 2" , amount: 124, date : new Date(2022, 5, 16), },
 
-  {title:"Title 3" , amount: 125, date : new Date(2011, 3, 19), },
+  {id : "e3",title:"Title 3" , amount: 125, date : new Date(2011, 3, 19), },
 
-  {title:"Title 4" , amount: 126, date : new Date(2021, 1, 12), },
+  {id : "e4",title:"Title 4" , amount: 126, date : new Date(2021, 1, 12), },
 
 ]
 
-  const [expences, setExpences] = useState(expenses)
+
+
+function App() {
+
+  const [expences, setExpences] = useState(expInitial)
 function addExpenseHandler(expense){
-  setExpences(expense)
+  console.log(expense)
+  setExpences((prevState) =>{
+    console.log([expense, ...prevState])
+    return [expense, ...prevState]
+  })
 }
   return (
-    <div class="container" className="App">
+    <div class="container" >
       <NewExpence addExpense={addExpenseHandler}/>
-    <ul class="list-group list-group-flush">
-    {
-      expenses.map((expense, index)=>(
-        <li class="list-group-item">        
-        <ExpenseItem title={expense.title}
-        date={expense.date}
-        amount={expense.amount}>
-        </ExpenseItem>
-        {index}
-        </li>
-
-      ))
-    }
-    </ul>
+      <ExpensesList items={expences}/>
 
     </div>
   );

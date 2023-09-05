@@ -7,19 +7,19 @@ import StateLecutre from '../../lecture_4/components/StateLecture'
 //Kapiram da je sve u memoriji i svaki put ona se vezuje u memoriji za alociranu tu insancu jedne komponente
 //ne vidi ostale i zato se pri update ne update svi nego samo ta instanca
 //jedno se inicijalizuje i prilikom narednih poziva nece pretebati na staro nego ce koristiti updated version :D
-function ExpenseItem(props) {
+function  ExpenseItem(props) {
     const [title, setTitle] = useState(props.title);
     // use state vrac fju koja vraca array gde je prvi elemtnt sama varjabla
     //a drugi element je fja koja moze da setuje polje
     return (
-    <div>
+    <li>
         <ExpenseDate date = {props.date}> </ExpenseDate>
         <div>
         <h2>{title}</h2>
         </div>
         <div>{props.amount}</div>
         <StateLecutre changeTitle={setTitle}/>
-    </div>
+    </li>
     );
 }
 
