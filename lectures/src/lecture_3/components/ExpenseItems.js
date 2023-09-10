@@ -12,7 +12,7 @@ function  ExpenseItem(props) {
     // use state vrac fju koja vraca array gde je prvi elemtnt sama varjabla
     //a drugi element je fja koja moze da setuje polje
     return (
-    <li>
+    <li class="list-group-item">
         <ExpenseDate date = {props.date}> </ExpenseDate>
         <div>
         <h2>{title}</h2>

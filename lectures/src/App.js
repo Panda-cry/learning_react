@@ -1,6 +1,8 @@
 import NewExpence from './lecture_4/components/NewExpence';
 import ExpensesList from "./lecture_4/components/ExpensesList"
 import React, { useState } from 'react';
+import CourseForm from './lecture_5/components/CourseForm';
+import ListCourses from './lecture_5/components/ListCourses';
 
 const  expInitial = [
   {id : "e1", title:"Title 1" , amount: 123, date : new Date(2021, 2, 13), },
@@ -12,9 +14,12 @@ const  expInitial = [
 
 ]
 
-
-
+const initCourses=[
+  {id:11, title:"Learn React!!!"}
+]
 function App() {
+
+  const [courses,setCourses] = useState(initCourses)
 
   const [expences, setExpences] = useState(expInitial)
 function addExpenseHandler(expense){
@@ -24,11 +29,28 @@ function addExpenseHandler(expense){
     return [expense, ...prevState]
   })
 }
+
+function addNewCourse(newCourse){
+  console.log(newCourse)
+  setCourses(
+    (prevState)=>{
+      return [...prevState,newCourse]
+    }
+  )
+}
+
+function deletedCourse(idDeleted){
+  console.log(idDeleted)
+    const newList = courses.filter((course) => course.id != idDeleted)
+    setCourses(newList)
+}
+
   return (
     <div class="container" >
-      <NewExpence addExpense={addExpenseHandler}/>
-      <ExpensesList items={expences}/>
-
+    {/*  <NewExpence addExpense={addExpenseHandler}/>
+      <ExpensesList items={expences}/>*/}
+    <CourseForm addCourse={addNewCourse} ></CourseForm>
+      <ListCourses courses={courses} deleteWithID={deletedCourse}/>
     </div>
   );
 }
