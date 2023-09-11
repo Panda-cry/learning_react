@@ -3,7 +3,8 @@ import ExpensesList from "./lecture_4/components/ExpensesList"
 import React, { useState } from 'react';
 import CourseForm from './lecture_5/components/CourseForm';
 import ListCourses from './lecture_5/components/ListCourses';
-
+import PersonForm from './mini_project/components/PersonForm';
+import PersonList from './mini_project/components/PersonList';
 const  expInitial = [
   {id : "e1", title:"Title 1" , amount: 123, date : new Date(2021, 2, 13), },
   {id : "e2",title:"Title 2" , amount: 124, date : new Date(2022, 5, 16), },
@@ -22,6 +23,10 @@ function App() {
   const [courses,setCourses] = useState(initCourses)
 
   const [expences, setExpences] = useState(expInitial)
+
+  const [users, setUsers] = useState([])
+
+  
 function addExpenseHandler(expense){
   console.log(expense)
   setExpences((prevState) =>{
@@ -44,13 +49,28 @@ function deletedCourse(idDeleted){
     const newList = courses.filter((course) => course.id != idDeleted)
     setCourses(newList)
 }
+function createUser(newUser){
+    setUsers(
+      (oldUsers)=>{
+        return [newUser,...oldUsers]
+        }
+      )
+      console.log(users)
+}
 
   return (
     <div class="container" >
     {/*  <NewExpence addExpense={addExpenseHandler}/>
       <ExpensesList items={expences}/>*/}
-    <CourseForm addCourse={addNewCourse} ></CourseForm>
+    {/*<CourseForm addCourse={addNewCourse} ></CourseForm>
       <ListCourses courses={courses} deleteWithID={deletedCourse}/>
+    */} 
+    
+    <PersonForm addNewUser={createUser}/>
+    <PersonList users={users} />
+  
+    
+    
     </div>
   );
 }
