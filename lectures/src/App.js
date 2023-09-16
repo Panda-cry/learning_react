@@ -1,11 +1,61 @@
-import NewExpence from './lecture_4/components/NewExpence';
+import React, { useState, useEffect} from 'react'
+import NavBar from './lecture_10/componets/NavBar';
+import Home from './lecture_10/componets/Home';
+import Login from './lecture_10/componets/Login';
+
+function App() {
+  const [log, setLog] = useState(false)
+
+  useEffect(()=>{
+    if(localStorage.getItem('logged') ==="true"){
+      setLog(true)
+    }
+  },[])
+
+  function onLogOut(){
+
+    console.log('Logged out')
+    localStorage.removeItem('logged')
+    setLog(false)
+  }
+
+  function onLogin(){
+    console.log("Logged in")
+    localStorage.setItem('logged',"true")
+    setLog(true)
+  }
+
+  return (
+      <React.Fragment>
+        <NavBar isLogged={log} logOut={onLogOut}/>
+        {
+          log === true && <Home/>
+        }
+        {
+          log === false && <Login login={onLogin}/>
+        }
+      </React.Fragment>
+  )
+
+}
+
+export default App;
+
+
+{
+  /* 
+  
+
+  import NewExpence from './lecture_4/components/NewExpence';
 import ExpensesList from "./lecture_4/components/ExpensesList"
 import React, { useState } from 'react';
 import CourseForm from './lecture_5/components/CourseForm';
 import ListCourses from './lecture_5/components/ListCourses';
 import PersonForm from './mini_project/components/PersonForm';
 import PersonList from './mini_project/components/PersonList';
-const  expInitial = [
+
+
+  const  expInitial = [
   {id : "e1", title:"Title 1" , amount: 123, date : new Date(2021, 2, 13), },
   {id : "e2",title:"Title 2" , amount: 124, date : new Date(2022, 5, 16), },
 
@@ -18,8 +68,9 @@ const  expInitial = [
 const initCourses=[
   {id:11, title:"Learn React!!!"}
 ]
-function App() {
-
+---------------------------------------
+  
+  
   const [courses,setCourses] = useState(initCourses)
 
   const [expences, setExpences] = useState(expInitial)
@@ -60,11 +111,11 @@ function createUser(newUser){
 
   return (
     <div class="container" >
-    {/*  <NewExpence addExpense={addExpenseHandler}/>
-      <ExpensesList items={expences}/>*/}
-    {/*<CourseForm addCourse={addNewCourse} ></CourseForm>
+     <NewExpence addExpense={addExpenseHandler}/>
+      <ExpensesList items={expences}/>
+    <CourseForm addCourse={addNewCourse} ></CourseForm>
       <ListCourses courses={courses} deleteWithID={deletedCourse}/>
-    */} 
+    
     
     <PersonForm addNewUser={createUser}/>
     <PersonList users={users} />
@@ -73,10 +124,16 @@ function createUser(newUser){
     
     </div>
   );
+  
+  
+  
+  
+  
+  
+  
+  
+  */
 }
-
-export default App;
-
 
 //Moguce je napraviti komponentu koja je kao wrapper
 //da bi se koristila kao html tag mora u sebi da ima 
