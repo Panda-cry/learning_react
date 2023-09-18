@@ -1,5 +1,6 @@
-import { useRef, useEffect, useState, useReducer } from "react";
+import { useRef, useEffect, useState, useReducer, useContext } from "react";
 import React from "react";
+import AuthContext from "./auth-context";
 
 function emailReducer(state, action){
     if(action.type === "USER_INPUT"){
@@ -14,6 +15,7 @@ function emailReducer(state, action){
 }
 
 function Login(props){
+    const ctx = useContext(AuthContext)
 
     const [email,setEmail] = useReducer(emailReducer,{value:"",isValid:false}) 
     //const [email,setEmail] = useState('')
@@ -25,7 +27,7 @@ function Login(props){
       let timer = setTimeout(() => {
         console.log("Timer");
         checkForm(email.isValid,pass.length > 6);
-      }, 5000);
+      }, 500);
       return () => {
         console.log("Data");
         //clearTimeout(timer)
@@ -70,7 +72,7 @@ function Login(props){
 
     function onSubmitHandler(event){
         event.preventDefault()
-        props.login()
+        ctx.login(email.value,pass)
     }
 
     return (

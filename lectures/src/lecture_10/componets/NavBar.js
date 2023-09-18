@@ -1,16 +1,17 @@
-import React from "react";
+import React, {useContext}from "react";
+import AuthContext from "./auth-context";
 
 
-function NavBar(props){
-
+function NavBar(){
+  const ctx = useContext(AuthContext)
     function onClickLogoutHandler(){
-        props.logOut()
+        ctx.logout()
     }
 
     return (
         <React.Fragment>
 <nav className="navbar navbar-expand-lg ">
-{props.isLogged === true && <div className="container-fluid">
+{ctx.isLoggedIn === true && <div className="container-fluid">
     <a className="navbar-brand" href="#">Welcome</a>
 
     <div  id="navbarSupportedContent">

@@ -1,40 +1,23 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect, useContext} from 'react'
 import NavBar from './lecture_10/componets/NavBar';
 import Home from './lecture_10/componets/Home';
 import Login from './lecture_10/componets/Login';
+import AuthContext from './lecture_10/componets/auth-context';
 
 function App() {
-  const [log, setLog] = useState(false)
-
-  useEffect(()=>{
-    if(localStorage.getItem('logged') ==="true"){
-      setLog(true)
-    }
-  },[])
-
-  function onLogOut(){
-
-    console.log('Logged out')
-    localStorage.removeItem('logged')
-    setLog(false)
-  }
-
-  function onLogin(){
-    console.log("Logged in")
-    localStorage.setItem('logged',"true")
-    setLog(true)
-  }
+  const ctx = useContext(AuthContext)
 
   return (
-      <React.Fragment>
-        <NavBar isLogged={log} logOut={onLogOut}/>
+        <React.Fragment>
+        <NavBar/>
         {
-          log === true && <Home/>
+          ctx.isLoggedIn === true && <Home/>
         }
         {
-          log === false && <Login login={onLogin}/>
+          ctx.isLoggedIn === false && <Login />
         }
-      </React.Fragment>
+  
+        </React.Fragment>
   )
 
 }
