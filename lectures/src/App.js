@@ -1,11 +1,28 @@
-import React, { useState, useEffect, useContext} from 'react'
-import NavBar from './lecture_10/componets/NavBar';
-import Home from './lecture_10/componets/Home';
-import Login from './lecture_10/componets/Login';
-import AuthContext from './lecture_10/componets/auth-context';
+import React, { useState, useEffect, useContext } from "react";
+import NavBar from "../src/foodOrderApp/components/NavBar";
+import FoodList from "./foodOrderApp/components/FoodList";
+import Cart from "./foodOrderApp/components/Cart";
+import { MealProvider } from "./foodOrderApp/components/MealsContex";
 
 function App() {
-  const ctx = useContext(AuthContext)
+  const [buttonClicked, setButton] = useState(false);
+
+  return (
+    <MealProvider>
+      <NavBar clickButton={setButton}></NavBar>
+      <FoodList clickButton={setButton} />
+      {buttonClicked && <Cart></Cart>}
+    </MealProvider>
+  );
+}
+
+export default App;
+
+{
+  /* 
+  Lecture 10
+  -------------------------------
+    const ctx = useContext(AuthContext)
 
   return (
         <React.Fragment>
@@ -20,14 +37,7 @@ function App() {
         </React.Fragment>
   )
 
-}
-
-export default App;
-
-
-{
-  /* 
-  
+  ------------------------------------
 
   import NewExpence from './lecture_4/components/NewExpence';
 import ExpensesList from "./lecture_4/components/ExpensesList"
@@ -119,14 +129,13 @@ function createUser(newUser){
 }
 
 //Moguce je napraviti komponentu koja je kao wrapper
-//da bi se koristila kao html tag mora u sebi da ima 
+//da bi se koristila kao html tag mora u sebi da ima
 //prop.children a neki class name koji moze da se doda na njega
 //const = props.ime_necega mozemo da dodamo class name
 //u globalu sve se gleda taj props kao dict
-//uglavnom koliko sam ukapirao uvek se koristi 
+//uglavnom koliko sam ukapirao uvek se koristi
 //react.creteElement() koji kreira neki div ili tako
 //ako je custom Component vrv ide tamo i posto je i to fja
 // i ona se parsira preko react.createElement
 
-
-const someFunction = () => {}
+const someFunction = () => {};
