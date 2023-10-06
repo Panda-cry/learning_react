@@ -1,18 +1,26 @@
 import React, { useState, useEffect, useContext } from "react";
-import NavBar from "../src/foodOrderApp/components/NavBar";
-import FoodList from "./foodOrderApp/components/FoodList";
-import Cart from "./foodOrderApp/components/Cart";
-import { MealProvider } from "./foodOrderApp/components/MealsContex";
+import Header from "./food_order_app_follow/components/Layout/Header";
+import Meals from "./food_order_app_follow/components/Meals/Meals";
+import Cart from "./food_order_app_follow/components/Cart/Cart";
+import CartProvider from "./food_order_app_follow/components/store/CartProvider";
 
 function App() {
   const [buttonClicked, setButton] = useState(false);
+  const [cartIsShown, setCartIsShown] = useState(false);
 
+  const showCartHandler = () => {
+    setCartIsShown(true);
+  };
+  const hideCartHandler = () => {
+    setCartIsShown(false);
+  };
   return (
-    <MealProvider>
-      <NavBar clickButton={setButton}></NavBar>
-      <FoodList clickButton={setButton} />
-      {buttonClicked && <Cart></Cart>}
-    </MealProvider>
+    <CartProvider>
+      {cartIsShown && <Cart onClose={hideCartHandler} />}
+      <Header onShowCart={showCartHandler}></Header>
+
+      <Meals></Meals>
+    </CartProvider>
   );
 }
 
@@ -20,6 +28,16 @@ export default App;
 
 {
   /* 
+
+  lecture food app my way 
+
+    <MealProvider>
+      <NavBar clickButton={setButton}></NavBar>
+      <FoodList clickButton={setButton} />
+      {buttonClicked && <Cart></Cart>}
+    </MealProvider>
+
+  ------------
   Lecture 10
   -------------------------------
     const ctx = useContext(AuthContext)
