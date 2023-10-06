@@ -1,0 +1,21 @@
+Ovako koliko sam ja ukapirao u ovome delu prvo je objasnio da kada krairamo komponente
+ispod haube se kreira virutelni dom koji poredi novo kreirane komponenta i staru verziju komponente
+i tako obicnom DOM-u salje samo  one delove koji su promenjenji 
+
+
+da bi malo optimozovali kod  ako koristimo context useState, props uvek ce nam se ponovo 
+komponenta kreirati, nakon svake manje promenje
+ako se parent component promeni onda ce da se ponovo child komponenta renderuje.
+Da bi to izbegli koristimo React.memo i tako necemo da nam neke komponente ponovo renderuje
+ali ako kroz props u komponenti saljemo neku fju ili listu one se u JS menjaju iako saljemo istu fju
+svaki naredni put ona zauzima novi memorijski prostor i zato nije ista
+zbog toga mozemo da iskoristimo useCallback da sacuvamo jednom fju i da ona zauzme 1 prostor i da 
+se ne rekreira ponovo element.
+UserState jednom zapamti i nakon samo radi update  ali update nije odma 
+posto se radi sa fjom odradis se schedule kada ce da se promeni 
+pa je praska da budemo sigurni za redosled kada se setuje da unutar bude fja 
+jer se fje uved zakazuju i moraju da se odrade, tako da nece pojesti neko stanje
+mozemo da koristimo useMemo hook da bi sacuvali vrednost neke liste koja se ne menja ili tako nesto
+da ne moramo da update stalno neku komponentu.
+useMemo i useCallback imaju dependecy polje gde se govori kada da se pozovu ako se nesto promenilo
+mozemo props da razlozimo kao u pjthonu tuple const { items } = props je isto sto i props.items :Da
