@@ -3,11 +3,21 @@ import Header from "./food_order_app_follow/components/Layout/Header";
 import Meals from "./food_order_app_follow/components/Meals/Meals";
 import Cart from "./food_order_app_follow/components/Cart/Cart";
 import CartProvider from "./food_order_app_follow/components/store/CartProvider";
+import Movie from "./lecture_14/components/Movies";
+import Movies from "./lecture_14/components/Movies";
 
 function App() {
+  function getRequest() {
+    fetch("https://swapi.dev/api/films")
+      .then((response) => response.json())
+      .then((data) => setMovies(data.results));
+  }
   const [buttonClicked, setButton] = useState(false);
   const [cartIsShown, setCartIsShown] = useState(false);
-
+  const [movies, setMovies] = useState([]);
+  useEffect(() => {
+    getRequest();
+  }, []);
   const showCartHandler = () => {
     setCartIsShown(true);
   };
@@ -15,12 +25,9 @@ function App() {
     setCartIsShown(false);
   };
   return (
-    <CartProvider>
-      {cartIsShown && <Cart onClose={hideCartHandler} />}
-      <Header onShowCart={showCartHandler}></Header>
-
-      <Meals></Meals>
-    </CartProvider>
+    <React.Fragment>
+      <Movies items={movies}></Movies>
+    </React.Fragment>
   );
 }
 
