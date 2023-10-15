@@ -5,6 +5,9 @@ import Cart from "./food_order_app_follow/components/Cart/Cart";
 import CartProvider from "./food_order_app_follow/components/store/CartProvider";
 import Movie from "./lecture_14/components/Movies";
 import Movies from "./lecture_14/components/Movies";
+import ForwardCounter from "./lecture_15/components/ForwardCounter";
+import BackwardCounter from "./lecture_15/components/BackwardCounter";
+import useHttp from "./lecture_15/hooks/use-http";
 
 function App() {
   function getRequest() {
@@ -15,6 +18,28 @@ function App() {
   const [buttonClicked, setButton] = useState(false);
   const [cartIsShown, setCartIsShown] = useState(false);
   const [movies, setMovies] = useState([]);
+
+  const [tasks, setTasks] = useState([]);
+  function getDataModify(data) {
+    const tempList = [];
+    for (item in data) {
+      tempList.push({ id: item, text: data[item].text });
+    }
+    setTasks(tempList);
+  }
+  const {
+    isLoading,
+    error,
+    sendRequest: fetchTasks,
+  } = useHttp(
+    {
+      url: "https://asymmetric-lore-317721-default-rtdb.firebaseio.com/tasks.json",
+    },
+    getDataModify
+  );
+  useEffect(() => {
+    fetchTasks();
+  }, []);
   useEffect(() => {
     getRequest();
   }, []);
@@ -24,11 +49,7 @@ function App() {
   const hideCartHandler = () => {
     setCartIsShown(false);
   };
-  return (
-    <React.Fragment>
-      <Movies items={movies}></Movies>
-    </React.Fragment>
-  );
+  return <React.Fragment></React.Fragment>;
 }
 
 export default App;
