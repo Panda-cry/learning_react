@@ -8,9 +8,24 @@ import Movies from "./lecture_14/components/Movies";
 import ForwardCounter from "./lecture_15/components/ForwardCounter";
 import BackwardCounter from "./lecture_15/components/BackwardCounter";
 import useHttp from "./lecture_15/hooks/use-http";
+import SimpleFunction from "./lecture_16/SimpleInput";
 
 function App() {
-  function getRequest() {
+  return (
+    <React.Fragment>
+      <SimpleFunction></SimpleFunction>
+    </React.Fragment>
+  );
+}
+
+export default App;
+
+{
+  /* 
+  --------------------- Lecutres to 15
+
+
+    function getRequest() {
     fetch("https://swapi.dev/api/films")
       .then((response) => response.json())
       .then((data) => setMovies(data.results));
@@ -49,14 +64,10 @@ function App() {
   const hideCartHandler = () => {
     setCartIsShown(false);
   };
-  return <React.Fragment></React.Fragment>;
-}
 
-export default App;
+  ----------------------------------------
 
-{
-  /* 
-
+  
   lecture food app my way 
 
     <MealProvider>
