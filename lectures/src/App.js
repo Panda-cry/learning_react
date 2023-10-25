@@ -9,11 +9,18 @@ import ForwardCounter from "./lecture_15/components/ForwardCounter";
 import BackwardCounter from "./lecture_15/components/BackwardCounter";
 import useHttp from "./lecture_15/hooks/use-http";
 import SimpleFunction from "./lecture_16/SimpleInput";
-
+import CounterRedux from "./redux-demo-folder/CounterRedux";
+import { Provider, useSelector } from "react-redux";
+import store from "../src/redux-demo-folder/store/index";
+import NavBarRedux from "./redux-demo-folder/NavBarRedux";
+import AuthRedux from "./redux-demo-folder/AuthRedux";
 function App() {
+  const auth = useSelector((state) => state.auth.auth);
   return (
     <React.Fragment>
-      <SimpleFunction></SimpleFunction>
+      <NavBarRedux auth={auth}></NavBarRedux>
+      {!auth && <AuthRedux auth={auth} />}
+      <CounterRedux></CounterRedux>
     </React.Fragment>
   );
 }
@@ -22,6 +29,9 @@ export default App;
 
 {
   /* 
+
+
+        <SimpleFunction></SimpleFunction>
   --------------------- Lecutres to 15
 
 
