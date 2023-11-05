@@ -7,9 +7,11 @@ import "bootstrap/dist/css/bootstrap.css";
 import { AuthProvider } from "./lecture_10/componets/auth-context";
 import { Provider } from "react-redux";
 import store from "./redux-demo-folder/store/index";
+import cartStore from "./lecutre_17/store/cart-store-redux";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Provider store={store}>
+  <Provider store={cartStore}>
     <App />
   </Provider>
 );

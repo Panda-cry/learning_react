@@ -11,16 +11,41 @@ import useHttp from "./lecture_15/hooks/use-http";
 import SimpleFunction from "./lecture_16/SimpleInput";
 import CounterRedux from "./redux-demo-folder/CounterRedux";
 import { Provider, useSelector } from "react-redux";
-import store from "../src/redux-demo-folder/store/index";
 import NavBarRedux from "./redux-demo-folder/NavBarRedux";
 import AuthRedux from "./redux-demo-folder/AuthRedux";
+import ReduxCart from "./lecutre_17/ReduxCart";
+import store from "./lecutre_17/store/cart-store-redux";
+
+let init_val = false;
 function App() {
-  const auth = useSelector((state) => state.auth.auth);
+  const cart = useSelector((state) => state.cart);
+
+  useEffect(
+    function () {
+      if (!init_val) {
+        init_val = true;
+        return;
+      }
+      console.log("Ovde saljemo backend-u iteme");
+      /* a mozemo takodje i da uradimo sa actions 
+    
+    mozemo da imamo neku varijablu koja govori da li je inicijalno pokretanje app
+    posle toga dispatch(sentCartData(cart))
+    
+    imamo tamo fju u fji i to moze jer dispatch ce da okine tamo onu fju 
+    i dace nam dispatch jer je logika je da se koristi fja 
+    a da se ne koristi reducer i tjt 
+    ne treba da se useEffect pretrpava i onda se desava to u action creator functions!!!
+    ReduxDev tools !!!
+    
+    */
+    },
+    [cart]
+  );
+
   return (
     <React.Fragment>
-      <NavBarRedux auth={auth}></NavBarRedux>
-      {!auth && <AuthRedux auth={auth} />}
-      <CounterRedux></CounterRedux>
+      <ReduxCart></ReduxCart>
     </React.Fragment>
   );
 }
@@ -30,6 +55,19 @@ export default App;
 {
   /* 
 
+  Treba napomenuti jos jednom u redux se ne stavlja nista side effect
+  to slanje necega 
+  ili se radi u componenti sa useEffect ili action creators!!!
+  mozemo neke notifikacije da izbacimo kada radimo sa useeffect i saljemo nesto na backedn
+  mozda da bude async i da se henldaju errori responsa itd.
+
+
+lecture 16
+ <React.Fragment>
+      <NavBarRedux auth={auth}></NavBarRedux>
+      {!auth && <AuthRedux auth={auth} />}
+      <CounterRedux></CounterRedux>
+    </React.Fragment>
 
         <SimpleFunction></SimpleFunction>
   --------------------- Lecutres to 15
