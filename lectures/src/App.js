@@ -16,7 +16,7 @@ import AuthRedux from "./redux-demo-folder/AuthRedux";
 import ReduxCart from "./lecutre_17/ReduxCart";
 import store from "./lecutre_17/store/cart-store-redux";
 import { Routes, Route } from "react-router";
-import { Link, NavLink } from "react-router-dom";
+import { BrowserRouter, Link, NavLink } from "react-router-dom";
 import Welcome from "./react-routing/wlecome";
 import Start1 from "./react-routing/started1";
 import Detailed from "./react-routing/detailed-page";
@@ -27,9 +27,11 @@ import quotesStore from "./quotes-mini-proj/quotes-context";
 function App() {
   return (
     <React.Fragment>
-      <StartPageQoutes></StartPageQoutes>
+      <BrowserRouter>
+        <StartPageQoutes></StartPageQoutes>
 
-      <QuotesRouter></QuotesRouter>
+        <QuotesRouter></QuotesRouter>
+      </BrowserRouter>
     </React.Fragment>
   );
 }

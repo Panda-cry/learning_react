@@ -12,11 +12,9 @@ function QuotesList(props) {
   function sortOnClick() {
     console.log("sorted");
   }
-  const quotes = useMemo(() => {
-    // Unutar useMemo koristite useSelector
-    const selectedQuotes = useSelector((state) => state.quotes.quotes);
-    return selectedQuotes;
-  }, []);
+
+  const quotes = useSelector((state) => state.quotes.quotes);
+
   return (
     <div>
       <Box>

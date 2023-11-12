@@ -6,8 +6,8 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { Router } from "react-router";
+import { Link } from "react-router-dom";
 
-import Link from "@mui/material/Link";
 import QuotesList from "./QuotesList";
 import AddQuote from "./add-quote";
 
@@ -25,18 +25,18 @@ function StartPageQoutes(props) {
               sx={{ mr: 2 }}
             ></IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <Link href="welcome" underline="none" color="inherit">
+              <Link to="welcome" underline="none" color="inherit">
                 Great Quotes
               </Link>
             </Typography>
             <Button color="inherit">
-              <Link href="all-quotes" underline="none" color="inherit">
+              <Link to="all-quotes" underline="none" color="inherit">
                 All Quotes
               </Link>
             </Button>
             <Button color="inherit">
               {" "}
-              <Link href="add-quote" underline="none" color="inherit">
+              <Link to="add-quote" underline="none" color="inherit">
                 Add Quote
               </Link>
             </Button>
@@ -54,7 +54,10 @@ export default StartPageQoutes;
     Kada se radi rutiranje onda se renderuje izgleda sve ponovo i postavlja se vrednost na []
     i onda uvek imam praznu listu :D
     
-        
+    renderuje se ponovo jer sam koristio href
+    ako se koristi Link koji router daje onda se ne radi refres strane nego samo render komponente
+    i sve ostaje sacuvano 
+    
     
     
     */
