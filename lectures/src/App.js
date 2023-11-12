@@ -20,10 +20,26 @@ import { Link, NavLink } from "react-router-dom";
 import Welcome from "./react-routing/wlecome";
 import Start1 from "./react-routing/started1";
 import Detailed from "./react-routing/detailed-page";
+import StartPageQoutes from "./quotes-mini-proj/starting-page";
+import QuotesRouter from "./quotes-mini-proj/quotest-routhing";
+import quotesStore from "./quotes-mini-proj/quotes-context";
 
-let init_val = false;
 function App() {
   return (
+    <React.Fragment>
+      <StartPageQoutes></StartPageQoutes>
+
+      <QuotesRouter></QuotesRouter>
+    </React.Fragment>
+  );
+}
+
+export default App;
+
+{
+  /* 
+
+
     <div>
       <header>
         <NavLink to="/welcome">Welcome</NavLink>
@@ -41,13 +57,8 @@ function App() {
         ></Route>
       </Routes>
     </div>
-  );
-}
 
-export default App;
 
-{
-  /* 
   const cart = useSelector((state) => state.cart);
 
   useEffect(

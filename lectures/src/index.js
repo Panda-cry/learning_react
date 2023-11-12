@@ -9,10 +9,13 @@ import { Provider } from "react-redux";
 import store from "./redux-demo-folder/store/index";
 import cartStore from "./lecutre_17/store/cart-store-redux";
 import { BrowserRouter } from "react-router-dom";
+import quotesStore from "./quotes-mini-proj/quotes-context";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <App />
+    <Provider store={quotesStore}>
+      <App />
+    </Provider>
   </BrowserRouter>
 );
 //Provide from redux store={cartStore}
