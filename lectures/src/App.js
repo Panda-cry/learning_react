@@ -15,9 +15,39 @@ import NavBarRedux from "./redux-demo-folder/NavBarRedux";
 import AuthRedux from "./redux-demo-folder/AuthRedux";
 import ReduxCart from "./lecutre_17/ReduxCart";
 import store from "./lecutre_17/store/cart-store-redux";
+import { Routes, Route } from "react-router";
+import { Link, NavLink } from "react-router-dom";
+import Welcome from "./react-routing/wlecome";
+import Start1 from "./react-routing/started1";
+import Detailed from "./react-routing/detailed-page";
 
 let init_val = false;
 function App() {
+  return (
+    <div>
+      <header>
+        <NavLink to="/welcome">Welcome</NavLink>
+        <br></br>
+        <Link to="/detailed">Start1</Link>
+        <br></br>
+        <Link to="/">Home</Link>
+      </header>
+      <Routes>
+        <Route path="/welcome" element={<Welcome />}></Route>
+        <Route path="/detailed" element={<Start1></Start1>}></Route>
+        <Route
+          path="/detailed/:anything"
+          element={<Detailed></Detailed>}
+        ></Route>
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
+
+{
+  /* 
   const cart = useSelector((state) => state.cart);
 
   useEffect(
@@ -27,7 +57,7 @@ function App() {
         return;
       }
       console.log("Ovde saljemo backend-u iteme");
-      /* a mozemo takodje i da uradimo sa actions 
+    a mozemo takodje i da uradimo sa actions 
     
     mozemo da imamo neku varijablu koja govori da li je inicijalno pokretanje app
     posle toga dispatch(sentCartData(cart))
@@ -38,23 +68,11 @@ function App() {
     ne treba da se useEffect pretrpava i onda se desava to u action creator functions!!!
     ReduxDev tools !!!
     
-    */
-    },
-    [cart]
-  );
 
-  return (
-    <React.Fragment>
-      <ReduxCart></ReduxCart>
-    </React.Fragment>
-  );
-}
-
-export default App;
-
-{
-  /* 
-
+  ,
+  [cart]
+);
+  ----------------17
   Treba napomenuti jos jednom u redux se ne stavlja nista side effect
   to slanje necega 
   ili se radi u componenti sa useEffect ili action creators!!!
