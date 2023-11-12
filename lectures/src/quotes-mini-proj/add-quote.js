@@ -2,48 +2,35 @@ import { Button, Box, FormControl, TextField, Stack } from "@mui/material";
 import { useState } from "react";
 import { quoteActions } from "./quotes-context";
 import { useDispatch, useSelector } from "react-redux";
+// ... (imports remain the same)
 
 function AddQuote() {
   const [author, setAuthor] = useState("");
-  const [authorIsValid, setAuthorIsValid] = useState(false);
+  const [authorIsValid, setAuthorIsValid] = useState(true); // Default to true
   const [quote, setQuote] = useState("");
-  const [quoteIsValid, setQuoteIsValid] = useState(false);
+  const [quoteIsValid, setQuoteIsValid] = useState(true); // Default to true
   const dispatch = useDispatch();
+
   function formSubmitHandler(event) {
     event.preventDefault();
-    if (authorIsValid && quoteIsValid) {
+    if (author.trim() !== "" && quote.trim() !== "") {
       let id = Math.floor(Math.random() * 100);
       dispatch(quoteActions.addQuote({ id, author, quote }));
+      setAuthor("");
+      setQuote("");
     }
   }
 
   function authorOnChangeHandler(event) {
     let author = event.target.value.trim();
-    setAuthor(author);
+    setAuthor(event.target.value);
+    setAuthorIsValid(author.length > 0); // Validate on change
   }
 
   function quoteOnChangeHandler(event) {
     let quote = event.target.value.trim();
-    setQuote(quote);
-  }
-
-  function onBlurAuthorHandler(event) {
-    let author = event.target.value.trim();
-    if (author.length === 0) {
-      setAuthorIsValid(false);
-      return;
-    }
-    setAuthorIsValid(true);
-    setAuthor(author);
-  }
-  function onBlurQuoteHandler(event) {
-    let quote = event.target.value.trim();
-    if (quote.length === 0) {
-      setQuoteIsValid(false);
-      return;
-    }
-    setQuoteIsValid(true);
-    setQuote(quote);
+    setQuote(event.target.value);
+    setQuoteIsValid(quote.length > 0); // Validate on change
   }
   return (
     <div>
@@ -62,7 +49,6 @@ function AddQuote() {
             value={author}
             rows={3}
             color=""
-            onBlur={onBlurAuthorHandler}
             onChange={authorOnChangeHandler}
             helperText={!authorIsValid ? "Incorrect author format" : ""}
           />
@@ -76,9 +62,8 @@ function AddQuote() {
             label="Quote"
             variant="filled"
             color=""
-            helperText={!quoteIsValid ? "Incorrect author format" : ""}
+            helperText={!quoteIsValid ? "Incorrect quote format" : ""}
             onChange={quoteOnChangeHandler}
-            onBlur={onBlurQuoteHandler}
           />
         </FormControl>
         <FormControl fullWidth>

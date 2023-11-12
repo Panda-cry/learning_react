@@ -10,7 +10,16 @@ const quoteSlice = createSlice({
   reducers: {
     addQuote(state, action) {
       state.quotes.push(action.payload);
-      console.log(state.quotes.length);
+    },
+    sortUp(state) {
+      state.quotes.sort((a, b) => {
+        return a.id > b.id;
+      });
+    },
+    sortDown(state) {
+      state.quotes.sort((a, b) => {
+        return a.id < b.id;
+      });
     },
   },
 });

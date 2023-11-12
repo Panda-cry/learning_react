@@ -2,19 +2,25 @@ import { Button, List, Box } from "@mui/material";
 import SortSharpIcon from "@mui/icons-material/SortSharp";
 import QuoteItem from "./QuotesItem";
 import { useSelector } from "react-redux";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
+import { quoteActions } from "./quotes-context";
 const init_val = [
   { id: 1, author: "Petar", quote: "Da" },
   { id: 1, author: "Petar", quote: "Ne" },
 ];
 
 function QuotesList(props) {
+  var quotes = useSelector((state) => state.quotes.quotes);
+  const [change, setChanged] = useState(true);
   function sortOnClick() {
-    console.log("sorted");
+    console.log(change);
+    if (change) {
+      quoteActions.sortUp();
+    } else {
+      quoteActions.sortDown();
+    }
+    setChanged(!change);
   }
-
-  const quotes = useSelector((state) => state.quotes.quotes);
-
   return (
     <div>
       <Box>

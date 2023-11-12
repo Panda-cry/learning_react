@@ -15,7 +15,7 @@ function StartPageQoutes(props) {
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="static" b>
           <Toolbar>
             <IconButton
               size="large"
@@ -25,18 +25,27 @@ function StartPageQoutes(props) {
               sx={{ mr: 2 }}
             ></IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <Link to="welcome" underline="none" color="inherit">
+              <Link
+                to="welcome"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
                 Great Quotes
               </Link>
             </Typography>
             <Button color="inherit">
-              <Link to="all-quotes" underline="none" color="inherit">
+              <Link
+                to="all-quotes"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
                 All Quotes
               </Link>
             </Button>
             <Button color="inherit">
               {" "}
-              <Link to="add-quote" underline="none" color="inherit">
+              <Link
+                to="add-quote"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
                 Add Quote
               </Link>
             </Button>
@@ -57,7 +66,7 @@ export default StartPageQoutes;
     renderuje se ponovo jer sam koristio href
     ako se koristi Link koji router daje onda se ne radi refres strane nego samo render komponente
     i sve ostaje sacuvano 
-    
+
     
     
     */
